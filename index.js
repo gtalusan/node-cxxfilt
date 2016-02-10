@@ -3,12 +3,12 @@ const cc = (process.env.CROSS_COMPILE || '') + 'c++filt';
 const stream = require('stream');
 const Readable = stream.Readable;
 
-function pipe(data) {
+function pipe(data, options) {
 	if (!data) {
 		console.error('expecting some data');
 		return null;
 	}
-	const child = spawn(cc);
+	const child = spawn(cc, options);
 	child.on('error', function() {
 		console.error('error executing ' + cc);
 	});
